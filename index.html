@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CyberSafe: laboratório educativo de criptografia e segurança digital.">
+  <title>CyberSafe | Laboratório de Segurança Digital</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio"><span class="brand-icon">⌘</span> Cyber<span>Safe</span></a>
+    <nav><a href="#laboratorio">Laboratório</a><a href="#sobre">Aprenda</a><a href="#cuidados">Segurança</a></nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> LABORATÓRIO DE SEGURANÇA DIGITAL</div>
+        <h1>Explore a segurança<br>por trás dos <span>dados.</span></h1>
+        <p>Aprenda na prática como funcionam a criptografia, os hashes e a autenticação. Experimente as ferramentas em um ambiente educativo e local.</p>
+        <a class="primary-link" href="#laboratorio">Explorar ferramentas <span>→</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="shield"><div class="shield-inner">⌑</div><span class="shield-check">✓</span></div>
+        <span class="float-code code-one">010101</span><span class="float-code code-two">HASH_256</span>
+        <span class="float-code code-three">{ secure }</span>
+      </div>
+    </section>
+
+    <section class="section" id="laboratorio">
+      <div class="section-heading"><div><div class="eyebrow">MÃO NA MASSA</div><h2>Laboratório interativo</h2></div><p>Escolha uma ferramenta e teste<br>diretamente nesta página.</p></div>
+      <div class="tabs" role="tablist" aria-label="Ferramentas">
+        <button class="tab active" data-tab="cifra" role="tab" aria-selected="true">01 · Cifra</button>
+        <button class="tab" data-tab="hash" role="tab" aria-selected="false">02 · Hash</button>
+        <button class="tab" data-tab="login" role="tab" aria-selected="false">03 · Autenticação</button>
+        <button class="tab" data-tab="ataques" role="tab" aria-selected="false">04 · Simulações</button>
+      </div>
+
+      <section class="tool-panel active" id="panel-cifra">
+        <div class="tool-intro"><span class="tool-number">01</span><div><h3>Cifra de César</h3><p>Uma técnica clássica de substituição: cada letra é deslocada no alfabeto por uma quantidade escolhida.</p></div></div>
+        <label for="cifra-texto">Mensagem</label><textarea id="cifra-texto" placeholder="Digite uma mensagem para transformar..."></textarea>
+        <div class="field-row"><div class="field"><label for="deslocamento">Deslocamento</label><input id="deslocamento" type="number" min="0" max="25" value="3"></div><div class="field action-field"><label>Operação</label><div class="button-row"><button class="button primary" id="cifrar">Criptografar</button><button class="button secondary" id="decifrar">Descriptografar</button></div></div></div>
+        <div class="result"><div class="result-label">RESULTADO</div><output id="cifra-resultado">Sua mensagem transformada aparecerá aqui.</output><button class="copy" data-copy="cifra-resultado" aria-label="Copiar resultado">Copiar</button></div>
+      </section>
+
+      <section class="tool-panel" id="panel-hash" hidden>
+        <div class="tool-intro"><span class="tool-number">02</span><div><h3>Gerador de hash SHA-256</h3><p>O hash cria uma representação de tamanho fixo. Diferente da criptografia, não foi feito para ser revertido.</p></div></div>
+        <label for="hash-texto">Texto para gerar o hash</label><textarea id="hash-texto" placeholder="Digite um texto..."></textarea>
+        <button class="button primary" id="gerar-hash">Gerar hash SHA-256</button>
+        <div class="result"><div class="result-label">HASH GERADO</div><output id="hash-resultado">O resultado aparecerá aqui.</output><button class="copy" data-copy="hash-resultado" aria-label="Copiar hash">Copiar</button></div>
+        <p class="hint">Experimente mudar uma única letra e gerar novamente. O resultado será completamente diferente.</p>
+      </section>
+
+      <section class="tool-panel" id="panel-login" hidden>
+        <div class="tool-intro"><span class="tool-number">03</span><div><h3>Cadastro e autenticação</h3><p>Crie uma conta demonstrativa e faça login. A senha é processada com PBKDF2 e salt aleatório no próprio navegador.</p></div></div>
+        <div class="field-row"><div class="field"><label for="usuario">Nome de usuário</label><input id="usuario" autocomplete="off" placeholder="Ex.: estudante"></div><div class="field"><label for="senha">Senha de demonstração</label><input id="senha" type="password" autocomplete="new-password" placeholder="Crie uma senha"></div></div>
+        <div class="button-row"><button class="button primary" id="cadastrar">Criar cadastro</button><button class="button secondary" id="entrar">Testar login</button></div>
+        <div class="result"><div class="result-label">STATUS</div><output id="login-resultado">Nenhum cadastro realizado nesta sessão.</output></div>
+        <p class="hint">Demonstração: os dados ficam apenas na memória desta página e são apagados ao recarregar. Não use senhas reais.</p>
+      </section>
+
+      <section class="tool-panel" id="panel-ataques" hidden>
+        <div class="tool-intro"><span class="tool-number">04</span><div><h3>Simulações de ataques</h3><p>Veja como listas de palavras e tentativas de combinações podem descobrir senhas fracas. Tudo acontece localmente.</p></div></div>
+        <label for="senha-teste">Senha fictícia para a simulação</label><input id="senha-teste" type="text" placeholder="Use uma senha de exemplo, como gato">
+        <div class="button-row"><button class="button primary" id="dicionario">Simular ataque de dicionário</button><button class="button secondary" id="forca">Força bruta (até 3 letras)</button></div>
+        <div class="result"><div class="result-label">RESULTADO DA SIMULAÇÃO</div><output id="ataque-resultado">A simulação aparecerá aqui.</output></div>
+        <p class="hint">A força bruta testa apenas combinações de letras minúsculas com até 3 caracteres. Não há conexão com sites, contas ou redes.</p>
+      </section>
+    </section>
+
+    <section class="learn-section" id="sobre">
+      <div class="section-heading"><div><div class="eyebrow">CONCEITOS ESSENCIAIS</div><h2>O que está por trás?</h2></div><p>Conheça os conceitos trabalhados<br>neste laboratório.</p></div>
+      <div class="concept-grid">
+        <article class="concept"><span>↔</span><h3>Criptografia</h3><p>Transforma uma mensagem para que ela possa ser recuperada usando uma chave ou regra.</p></article>
+        <article class="concept"><span>#</span><h3>Hash</h3><p>Gera um resumo de tamanho definido. Não é um processo reversível como a criptografia.</p></article>
+        <article class="concept"><span>✳</span><h3>Salt</h3><p>Valor aleatório adicionado ao processo de proteção de senhas para evitar hashes idênticos.</p></article>
+        <article class="concept"><span>⌁</span><h3>Autenticação</h3><p>Confere se as credenciais apresentadas correspondem às informações cadastradas.</p></article>
+      </div>
+    </section>
+
+    <section class="warning" id="cuidados"><div class="warning-icon">!</div><div><h2>Aprender segurança também é praticar com responsabilidade.</h2><p>Este projeto é educativo. A cifra de César é fácil de quebrar e SHA-256 simples não é indicado para armazenar senhas. Em sistemas reais, use bibliotecas e protocolos apropriados. Nunca informe senhas pessoais neste laboratório.</p></div></section>
+  </main>
+  <footer><a class="brand" href="#inicio">⌘ Cyber<span>Safe</span></a><p>Projeto educativo · Alura Start · Segurança digital</p><a href="https://github.com/NatalyDamrat/CyberSafe" target="_blank" rel="noopener">Ver código no GitHub ↗</a></footer>
+</body>
+</html>
